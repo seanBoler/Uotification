@@ -37,21 +37,21 @@
               
               
               
-              /**
- *
- *解决本地推送 创建多条问题
- *获取所有本地推送
- *找到该key 的通知
- 如果有不再创建新的推送
- */
-- (void)addloalNotification{
-    // 获取所有本地通知数组
-    //[[UIApplication sharedApplication] cancelAllLocalNotifications];//删除所有的本地推送
+       /**
+       *
+       *解决本地推送 创建多条问题
+       *获取所有本地推送
+       *找到该key 的通知
+       如果有不再创建新的推送
+        */
+         - (void)addloalNotification{
+          // 获取所有本地通知数组
+         //[[UIApplication sharedApplication] cancelAllLocalNotifications];//删除所有的本地推送
     
-    NSArray *localNotifications = [UIApplication sharedApplication].scheduledLocalNotifications;
-    if (localNotifications.count >0 ) {
+          NSArray *localNotifications = [UIApplication sharedApplication].scheduledLocalNotifications;
+         if (localNotifications.count >0 ) {
         
-        for (UILocalNotification *notification in localNotifications) {
+         for (UILocalNotification *notification in localNotifications) {
             NSDictionary *userInfo = notification.userInfo;
             if (userInfo) {
                 // 根据设置通知参数时指定的key来获取通知参数
@@ -61,13 +61,14 @@
                 }
             }
         }
-    }else{
-        [[UIApplication sharedApplication] scheduleLocalNotification:self.localNotification];
-    }
-}
+          }else{
+          [[UIApplication sharedApplication] scheduleLocalNotification:self.localNotification];
+          }
+         }
 
-- (UILocalNotification *)localNotification{
-    if (!_localNotification) {
+
+         - (UILocalNotification *)localNotification{
+          if (!_localNotification) {
         
         _localNotification = [[UILocalNotification alloc] init];
         //设置时区（跟随手机的时区）
@@ -84,12 +85,12 @@
             NSDate *date = [formatter dateFromString:@"17:30:00"];
             //通知发出的时间
             _localNotification.fireDate = date;
-        }
-        //循环通知的周期
-        _localNotification.repeatInterval = kCFCalendarUnitDay;
-        //设置userinfo方便撤销
-        NSDictionary *info = [NSDictionary dictionaryWithObject:@"keyworld" forKey:@"worldKey"];
+         }
+                  //循环通知的周期
+                  _localNotification.repeatInterval = kCFCalendarUnitDay;
+                  //设置userinfo方便撤销
+                   NSDictionary *info = [NSDictionary dictionaryWithObject:@"keyworld" forKey:@"worldKey"];
         _localNotification.userInfo = info;
-    }
-    return _localNotification;
-}
+         }
+          return _localNotification;
+         }
